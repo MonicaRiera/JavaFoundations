@@ -4,7 +4,17 @@ public abstract class Dish
 {
 	public Dish() { }
 
-	public enum Type {
+    public Dish(String dishName, Type type, boolean glutenFree, boolean vegetarian, boolean halalMeat, boolean seafoodFree, Object extras) {
+        this.dishName = dishName;
+        this.type = type;
+        this.glutenFree = glutenFree;
+        this.vegetarian = vegetarian;
+        this.halalMeat = halalMeat;
+        this.seafoodFree = seafoodFree;
+        this.extras = extras;
+    }
+
+    public enum Type {
 	    ST, MC, DS
     }
 	
