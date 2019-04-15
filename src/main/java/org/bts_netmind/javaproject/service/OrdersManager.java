@@ -1,13 +1,20 @@
-package org.bts_netmind.javaproject;
+package org.bts_netmind.javaproject.service;
+
+import org.bts_netmind.javaproject.model.Dish;
+import org.bts_netmind.javaproject.model.Order;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class OrdersManager implements OnlineOrderOps {
 
     public OrdersManager(){}
 
+    // Reads the CSV file with BufferedReader and creates a Map with every category name and each value for each order,
+    // so if the columns are in a different order, it does not affect the result. Then, it adds it creates the order
+    // itself and returns a list of orders.
     public List<Order> readCSV(String fileName) throws Exception{
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
         String categoryNames = reader.readLine();
@@ -40,6 +47,25 @@ public class OrdersManager implements OnlineOrderOps {
             }
         }
         return orders;
+    }
+
+    public void writeCSV(List<Order> orders) throws Exception{
+        PrintWriter writer = new PrintWriter("online-order-sample.csv");
+
+        writer.println("customerName,dishName,type,gfd,vgd,hmd,sfd,extras");
+
+        for (Order order : orders) {
+            writer.println(order.getCustomerName() + ","
+                    + order.getDish().getDishName() + ","
+                    + order.getType() + ","
+            + order.getDish().isGlutenFree() + ","
+            + order.getDish().isVegetarian() + ","
+            + order.getDish().isHalalMeat() + ","
+            + order.getDish().isSeafoodFree() + ","
+            + order.getDish().getExtras());
+        }
+
+        writer.close();
     }
 
     public int getNumberOrders(List orderList) {

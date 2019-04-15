@@ -1,4 +1,4 @@
-package org.bts_netmind.javaproject;
+package org.bts_netmind.javaproject.model;
 
 public class Starter extends Dish {
 
@@ -10,4 +10,5 @@ public class Starter extends Dish {
     public String toString() {
         return super.toString() + "starter with " + extras + " needed";
     }
+
 }

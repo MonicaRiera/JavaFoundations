@@ -1,4 +1,7 @@
-package org.bts_netmind.javaproject;
+package org.bts_netmind.javaproject.model;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Order {
 
@@ -6,8 +9,7 @@ public class Order {
     private enum Type {st, mc, ds}
     private Type type;
     private Dish dish;
-
-
+    private static List<Order> orders = new ArrayList<Order>();
 
     public Order (String customerName, String dishName, String type, boolean gfd, boolean vgd, boolean hmd, boolean sfd, String extras) {
         this.type = Type.valueOf(type);
@@ -21,6 +23,13 @@ public class Order {
             this.dish = new Dessert(dishName, gfd, vgd, hmd, sfd, extras);
         }
 
+        orders.add(this);
+    }
+
+    public Order (String customerName, Dish dish) {
+        this.customerName = customerName;
+        this.dish = dish;
+        orders.add(this);
     }
 
     public String getCustomerName() {
@@ -37,6 +46,22 @@ public class Order {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public Dish getDish() {
+        return dish;
+    }
+
+    public void setDish(Dish dish) {
+        this.dish = dish;
+    }
+
+    public static List<Order> getOrders() {
+        return orders;
+    }
+
+    public static void setOrders(List<Order> orders) {
+        Order.orders = orders;
     }
 
     @Override

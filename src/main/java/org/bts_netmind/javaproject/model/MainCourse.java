@@ -1,4 +1,4 @@
-package org.bts_netmind.javaproject;
+package org.bts_netmind.javaproject.model;
 
 public class MainCourse extends Dish {
 

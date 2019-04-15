@@ -1,4 +1,4 @@
-package org.bts_netmind.javaproject;
+package org.bts_netmind.javaproject.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ public abstract class Dish {
     protected boolean halalMeat;
     protected boolean seafoodFree;
     protected String extras;
-    protected static List<Dish> dishes = new ArrayList<Dish>();
+    private static List<Dish> dishes = new ArrayList<Dish>();
 
 	public Dish() { }
 
@@ -25,7 +25,7 @@ public abstract class Dish {
         dishes.add(this);
     }
 
-    public List<Dish> getDishes() {
+    public static List<Dish> getDishes() {
         return dishes;
     }
 

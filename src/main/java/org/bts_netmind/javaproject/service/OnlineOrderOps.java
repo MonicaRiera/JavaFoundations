@@ -1,8 +1,8 @@
-package org.bts_netmind.javaproject;
+package org.bts_netmind.javaproject.service;
 
 import java.util.List;
 
-import org.bts_netmind.javaproject.Dish;
+import org.bts_netmind.javaproject.model.Dish;
 
 // 'OnlineOrderOps' is an interface designed by the system administrator. The aim is to indicate the 
 // developer (you, in this case) in which way the on-line order data should be accessed/treated/employed
