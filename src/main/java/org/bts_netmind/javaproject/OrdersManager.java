@@ -59,22 +59,49 @@ public class OrdersManager implements OnlineOrderOps {
     }
 
     public Dish getDish(List dishList, int dishIndex) {
-        return null;
+        return (Dish) dishList.get(dishIndex);
     }
 
     public String getAllDishToString(List dishList) {
-        return null;
+        String result ="";
+        for (Object dish : dishList) {
+            result += dish.toString() + "\n";
+        }
+        return result;
     }
 
     public List getDishesByType(List dishList, String dishType) {
-        return null;
+        List<Object> result = new ArrayList<Object>();
+        for (Object dish : dishList) {
+            if (dish.getClass().getName().contains(dishType)) {
+                result.add(dish);
+            }
+        }
+        return result;
     }
 
     public List getDishesByFeature(List dishList, String feature) {
-        return null;
+        List<Object> result = new ArrayList<Object>();
+        for (Object dishInList : dishList) {
+            Dish dish = (Dish) dishInList;
+            if (dish.isGlutenFree() && feature.equals("gfd")) {
+                result.add(dish);
+            } else if (dish.isVegetarian() && feature.equals("vgd")) {
+                result.add(dish);
+            } else if (dish.isHalalMeat() && feature.equals("hmd")) {
+                result.add(dish);
+            } else if (dish.isSeafoodFree() && feature.equals("sfd")) {
+                result.add(dish);
+            }
+        }
+
+        return result;
     }
 
     public String getStatsByDishType(List dishList, String dishType) {
-        return null;
+        float total = dishList.size();
+        List<Object> filtered = getDishesByFeature(dishList, dishType);
+        float stats = ((float) filtered.size() / total) * 100;
+        return stats + "% of " + total + " meals ordered are " + dishType;
     }
 }

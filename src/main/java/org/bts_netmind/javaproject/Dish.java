@@ -1,38 +1,40 @@
 package org.bts_netmind.javaproject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Dish {
 
     protected String dishName;
-    protected enum Type {st, mc, ds}
-    protected Type type;
     protected boolean glutenFree;
     protected boolean vegetarian;
     protected boolean halalMeat;
     protected boolean seafoodFree;
     protected String extras;
+    protected static List<Dish> dishes = new ArrayList<Dish>();
 
 	public Dish() { }
 
-    public Dish(String dishName, String type, boolean glutenFree, boolean vegetarian, boolean halalMeat, boolean seafoodFree, String extras) {
+    public Dish(String dishName, boolean glutenFree, boolean vegetarian, boolean halalMeat, boolean seafoodFree, String extras) {
         this.dishName = dishName;
         this.glutenFree = glutenFree;
         this.vegetarian = vegetarian;
         this.halalMeat = halalMeat;
         this.seafoodFree = seafoodFree;
         this.extras = extras;
-        this.type = Type.valueOf(type);
+        dishes.add(this);
     }
 
-	public String getDishName() { return dishName; }
+    public List<Dish> getDishes() {
+        return dishes;
+    }
+
+    public void setDishes(List<Dish> dishes) {
+        this.dishes = dishes;
+    }
+
+    public String getDishName() { return dishName; }
 	public void setDishName(String dName) { this.dishName = dName; }
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
-    }
 
     public boolean isGlutenFree() {
         return glutenFree;
@@ -66,7 +68,7 @@ public abstract class Dish {
         this.seafoodFree = seafoodFree;
     }
 
-    public Object getExtras() {
+    public String getExtras() {
         return extras;
     }
 
@@ -88,15 +90,6 @@ public abstract class Dish {
         }
         if (isSeafoodFree()) {
             result += "seafood free dish, ";
-        }
-
-        if (this.type == Type.st){
-            result += "starter with " + extras + " needed";
-        } else if (this.type == Type.mc) {
-            String[] arr = extras.split("-");
-            result += "main course made of " + arr[0] + " and preferred drink " + arr[1];
-        } else if (this.type == Type.ds) {
-            result += "dessert of " + extras + " calories";
         }
 
         return result;
