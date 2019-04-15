@@ -1,48 +1,38 @@
 package org.bts_netmind.javaproject;
 
-public abstract class Dish 
-{
+public abstract class Dish {
+
+    protected String dishName;
+    protected enum Type {st, mc, ds}
+    protected Type type;
+    protected boolean glutenFree;
+    protected boolean vegetarian;
+    protected boolean halalMeat;
+    protected boolean seafoodFree;
+    protected String extras;
+
 	public Dish() { }
 
-    public Dish(String dishName, String type, boolean glutenFree, boolean vegetarian, boolean halalMeat, boolean seafoodFree, Object extras) {
+    public Dish(String dishName, String type, boolean glutenFree, boolean vegetarian, boolean halalMeat, boolean seafoodFree, String extras) {
         this.dishName = dishName;
         this.glutenFree = glutenFree;
         this.vegetarian = vegetarian;
         this.halalMeat = halalMeat;
         this.seafoodFree = seafoodFree;
         this.extras = extras;
-        Dish.type.valueOf(type);
+        this.type = Type.valueOf(type);
     }
-
-    /*public enum Type {
-	    STARTER("ST"), MAINCOURSE("MC"), DESSERT("DS");
-
-        private String identifier;
-
-        Type(String identifier) {
-            this.identifier = identifier;
-        }
-    }*/
-	
-	protected String dishName;
-	//protected Type type;
-    protected enum type {st, mc, ds}
-	protected boolean glutenFree;
-	protected boolean vegetarian;
-	protected boolean halalMeat;
-	protected boolean seafoodFree;
-	protected Object extras;
 
 	public String getDishName() { return dishName; }
 	public void setDishName(String dName) { this.dishName = dName; }
 
-    /*public Type getType() {
+    public Type getType() {
         return type;
     }
 
     public void setType(Type type) {
         this.type = type;
-    }*/
+    }
 
     public boolean isGlutenFree() {
         return glutenFree;
@@ -80,7 +70,35 @@ public abstract class Dish
         return extras;
     }
 
-    public void setExtras(Object extras) {
+    public void setExtras(String extras) {
         this.extras = extras;
+    }
+
+    @Override
+    public String toString() {
+	    String result = this.dishName + ", a ";
+	    if (isGlutenFree()) {
+	        result += "gluten free dish, ";
+        }
+        if (isVegetarian()) {
+	        result += "vegetarian dish, ";
+        }
+        if (isHalalMeat()) {
+            result += "halal meat dish, ";
+        }
+        if (isSeafoodFree()) {
+            result += "seafood free dish, ";
+        }
+
+        if (this.type == Type.st){
+            result += "starter with " + extras + " needed";
+        } else if (this.type == Type.mc) {
+            String[] arr = extras.split("-");
+            result += "main course made of " + arr[0] + " and preferred drink " + arr[1];
+        } else if (this.type == Type.ds) {
+            result += "dessert of " + extras + " calories";
+        }
+
+        return result;
     }
 }

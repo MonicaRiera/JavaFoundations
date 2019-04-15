@@ -28,7 +28,7 @@ public interface OnlineOrderOps<T, S extends Dish> {
     public String getAllDishToString(List<S> dishList);
 
     // 'getDishesByType' retrieves a List of Dish-related objects corresponding to those dishes which match the
-    // type 'dishType' (st, mc, or ds) used as input argument
+    // Type 'dishType' (st, mc, or ds) used as input argument
     public List<S> getDishesByType(List<S> dishList, String dishType);
 
     // 'getDishesByFeature' returns a List of Dish-related objects including those dishes which belong to a category
@@ -36,6 +36,6 @@ public interface OnlineOrderOps<T, S extends Dish> {
     public List<S> getDishesByFeature(List<S> dishList, String feature);
 
     // 'getStatsByDishType' returns a String with the percentage of dishes ordered that correspond to
-    // a specific type (taken as input argument)
+    // a specific Type (taken as input argument)
     public String getStatsByDishType(List<S> dishList, String dishType);
 }
