@@ -4,22 +4,29 @@ public abstract class Dish
 {
 	public Dish() { }
 
-    public Dish(String dishName, Type type, boolean glutenFree, boolean vegetarian, boolean halalMeat, boolean seafoodFree, Object extras) {
+    public Dish(String dishName, String type, boolean glutenFree, boolean vegetarian, boolean halalMeat, boolean seafoodFree, Object extras) {
         this.dishName = dishName;
-        this.type = type;
         this.glutenFree = glutenFree;
         this.vegetarian = vegetarian;
         this.halalMeat = halalMeat;
         this.seafoodFree = seafoodFree;
         this.extras = extras;
+        Dish.type.valueOf(type);
     }
 
-    public enum Type {
-	    ST, MC, DS
-    }
+    /*public enum Type {
+	    STARTER("ST"), MAINCOURSE("MC"), DESSERT("DS");
+
+        private String identifier;
+
+        Type(String identifier) {
+            this.identifier = identifier;
+        }
+    }*/
 	
 	protected String dishName;
-	protected Type type;
+	//protected Type type;
+    protected enum type {st, mc, ds}
 	protected boolean glutenFree;
 	protected boolean vegetarian;
 	protected boolean halalMeat;
@@ -29,13 +36,13 @@ public abstract class Dish
 	public String getDishName() { return dishName; }
 	public void setDishName(String dName) { this.dishName = dName; }
 
-    public Type getType() {
+    /*public Type getType() {
         return type;
     }
 
     public void setType(Type type) {
         this.type = type;
-    }
+    }*/
 
     public boolean isGlutenFree() {
         return glutenFree;

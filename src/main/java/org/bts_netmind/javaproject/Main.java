@@ -2,27 +2,39 @@ package org.bts_netmind.javaproject;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
         BufferedReader reader = new BufferedReader(new FileReader("online-order-sample.csv"));
         String categoryNames = reader.readLine();
-        List<String> orders = new ArrayList<String>();
+        Map<String, String> ordersMap = new HashMap<String, String>();
+        List<String> categories = Arrays.asList(categoryNames.split(","));
+
         while (true) {
             String order = reader.readLine();
             if (order != null) {
-                //List<String> orderFields = Arrays.asList(order.split(","));
-                orders.add(order);
+                List<String> orderItems = Arrays.asList(order.split(","));
+                for (int i = 0; i < orderItems.size(); i++ ) {
+                    ordersMap.put(categories.get(i), orderItems.get(i));
+                }
+
+                Order onlineOrder = new Order(
+                        ordersMap.get("customerName"),
+                        ordersMap.get("dishName"),
+                        ordersMap.get("type"),
+                        Boolean.valueOf(ordersMap.get("gfd")),
+                        Boolean.valueOf(ordersMap.get("vgd")),
+                        Boolean.valueOf(ordersMap.get("hmd")),
+                        Boolean.valueOf(ordersMap.get("sfd")),
+                        ordersMap.get("extras"));
+                System.out.println(onlineOrder);
+
             } else {
                 break;
             }
         }
 
-        System.out.println(orders);
-        
     }
 }
