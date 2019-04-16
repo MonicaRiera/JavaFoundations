@@ -13,7 +13,7 @@ public class OrdersManager implements OnlineOrderOps {
     public OrdersManager(){}
 
     // Reads the CSV file with BufferedReader and creates a Map with every category name and each value for each order,
-    // so if the columns are in a different order, it does not affect the result. Then, it adds it creates the order
+    // so if the columns are in a different order, it should not affect the result. Then, it adds it creates the order
     // itself and returns a list of orders.
     public List<Order> readCSV(String fileName) throws Exception{
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
@@ -49,6 +49,7 @@ public class OrdersManager implements OnlineOrderOps {
         return orders;
     }
 
+    // Adds the new orders to the CSV
     public void writeCSV(List<Order> orders) throws Exception{
         PrintWriter writer = new PrintWriter("online-order-sample.csv");
 
@@ -66,6 +67,8 @@ public class OrdersManager implements OnlineOrderOps {
         }
 
         writer.close();
+
+        System.out.println("Your order has been processed! :)");
     }
 
     public int getNumberOrders(List orderList) {
@@ -125,9 +128,19 @@ public class OrdersManager implements OnlineOrderOps {
     }
 
     public String getStatsByDishType(List dishList, String dishType) {
-        float total = dishList.size();
         List<Object> filtered = getDishesByFeature(dishList, dishType);
-        float stats = ((float) filtered.size() / total) * 100;
-        return stats + "% of " + total + " meals ordered are " + dishType;
+        float stats = ((float) filtered.size() / (float) dishList.size()) * 100;
+        return stats + "% of " + dishList.size() + " meals ordered are " + dishType;
+    }
+
+    public String getStatsByCustomer(List<Order> orders, String customerName) {
+        float counter = 0;
+        for (Order order : orders) {
+            if (order.getCustomerName().equals(customerName)) {
+                counter++;
+            }
+        }
+        float stats = counter / orders.size() * 100;
+        return stats + "% of " + orders.size() + " orders are made by " + customerName;
     }
 }

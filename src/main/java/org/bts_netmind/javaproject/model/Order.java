@@ -29,6 +29,13 @@ public class Order {
     public Order (String customerName, Dish dish) {
         this.customerName = customerName;
         this.dish = dish;
+        if (dish.getClass().toString().contains("Starter")) {
+            this.type = Type.st;
+        } else if (dish.getClass().toString().contains("MainCourse")) {
+            this.type = Type.mc;
+        } else if (dish.getClass().toString().contains("Dessert")) {
+            this.type = Type.ds;
+        }
         orders.add(this);
     }
 

@@ -1,6 +1,5 @@
 package org.bts_netmind.javaproject;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
 import org.bts_netmind.javaproject.model.*;
 import org.bts_netmind.javaproject.service.OrdersManager;
 
@@ -21,6 +20,7 @@ public class Main {
         System.out.println("\nStarters:\n" + ordersManager.getDishesByType(dishes, "Starter"));
         System.out.println("\nVegetarian meals:\n" + ordersManager.getDishesByFeature(dishes, "vgd"));
         System.out.println("\nStats of Gluten Free:\n" + ordersManager.getStatsByDishType(dishes, "gfd"));
+        System.out.println("\nStats of Tony Stark:\n" + ordersManager.getStatsByCustomer(orders,"Tony Stark"));
 
 
         Scanner scanner = new Scanner(System.in);
@@ -44,7 +44,7 @@ public class Main {
         Dish starter3 = new Starter("Chicken salad", false, false, true, true, "regular cutlery");
         Dish main1 = new MainCourse("German sausage", false, false, false, true, "pork-warm wine");
         Dish main2 = new MainCourse("Paella", false, false, false, false, "pasta-red wine");
-        Dish main3 = new MainCourse("Vegetable lasagna", false, true, false, true, "spoon");
+        Dish main3 = new MainCourse("Vegetable lasagna", false, true, false, true, "spinach-white wine");
         Dish dessert1 = new Dessert("Fruit salad", true, true, false, true, "100");
         Dish dessert2 = new Dessert("Chocolate cake", false, true, false, true, "250");
         Dish dessert3 = new Dessert("Cheese and biscuits", false, false, false, true, "150");
