@@ -29,11 +29,11 @@ public class Main {
         Menu menu = createDishesForMenu();
         System.out.println(menu.printMenu());
         System.out.println("Choose your starter");
-        Order starterOrder = new Order(customerName, menu.getStarter(scanner.nextLine()));
+        new Order(customerName, menu.getStarter(scanner.nextLine()));
         System.out.println("Choose your main");
-        Order mainOrder = new Order(customerName, menu.getMain(scanner.nextLine()));
+        new Order(customerName, menu.getMain(scanner.nextLine()));
         System.out.println("Choose your dessert");
-        Order dessertOrder = new Order(customerName, menu.getDessert(scanner.nextLine()));
+        new Order(customerName, menu.getDessert(scanner.nextLine()));
 
         ordersManager.writeCSV(Order.getOrders());
     }
